@@ -1,0 +1,1837 @@
+BACKUP ~weidu_external/backup/stratagems~
+AUTHOR ~For help troubleshooting installation problems, go to the Sword Coast Stratagems forum at gibberlings3.net.~
+//MODDER setup_tra none area_variables none missing_extern none missing_resref none ict2_actions none missing_eval none overwriting_file none fun_args warn
+VERSION ~35.10~
+README ~stratagems/doc/readme-stratagems.html~
+AUTO_EVAL_STRINGS
+
+ALWAYS
+    OUTER_SPRINT %MOD_FOLDER% "stratagems"
+	OUTER_SET SFO_batch_mode_component_number=100
+    INCLUDE ~stratagems/sfo2e/batch_mode.tpc~
+    INCLUDE ~stratagems/lib/always.tph~
+END
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////	Language commands - checks the workspace version too
+////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+LANGUAGE
+"English"
+ENGLISH
+ 
+ ~stratagems/lang/english/setup.tra~
+ 
+
+LANGUAGE
+"Espanol (ElGamerViejuno) - last updated version 35.4"
+SPANISH
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/spanish/setup.tra~
+
+LANGUAGE
+"Polski (Yarpen) - last updated version 34.3"
+POLISH
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/polish/setup.tra~
+
+ LANGUAGE
+"Czech (Vicq) - last updated version 34.3"
+CZECH
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/czech/setup.tra~
+
+LANGUAGE
+"Deutsch (Leonardo Watson/YChap) - last updated version 35.7"
+GERMAN
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/german/setup.tra~
+
+LANGUAGE
+"Francais (Mornagest/Isaya/Graoumf/Gwendolyne/Jazira) - last updated version 34.2"
+FRENCH
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/french/setup.tra~
+
+
+ LANGUAGE
+"Italiano (Stoneangel/Improbabile) - last updated version 34.3"
+ITALIAN
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/italian/setup.tra~
+
+ LANGUAGE
+"Russian (Prowler/Silent/RealApxu) - last updated version 35.1"
+RUSSIAN
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/russian/setup.tra~
+
+// Korean translation commented out as it's very out-of-date
+
+/*
+ LANGUAGE
+"Korean (Menocu)"
+KOREAN
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/korean/setup.tra~
+*/
+
+
+  LANGUAGE
+"Simplified Chinese (c4_angel/www.trow.cc &  Lewis Liu) - last updated version 35.7"
+SCHINESE
+ ~stratagems/lang/schinese/setup.tra~
+
+
+/*
+LANGUAGE
+"Testing language for tra-copying games, no strings at all"
+EMPTY_LANGUAGE
+*/
+
+///////////////////////////////////////////////////////////////////
+////////////////////////////////////
+///	Test space
+////////////////////////////////////////////////////////////////////
+/////////////////////////////////////
+
+
+/*
+BEGIN test DESIGNATED 0
+REQUIRE_PREDICATE FILE_EXISTS "dw#test_component_active.mrk" "For internal use only"
+
+LAF run STR_VAR files=test location=test END
+*/
+
+
+///////////////////////////////////////////////////////////////////
+////////////////////////////////////
+///	Batch mode
+////////////////////////////////////////////////////////////////////
+/////////////////////////////////////
+
+BEGIN @10005 DESIGNATED 100 NO_LOG_RECORD
+
+///////////////////////////////////////////////////////////////////
+////////////////////////////////////
+///	Stratagems of Mystra (spell tweaks and new spells)
+/// 
+///	17 components as of 8-2023
+////////////////////////////////////////////////////////////////////
+/////////////////////////////////////
+
+BEGIN @24119 DESIGNATED 1500 /*LABEL dw_iwd_arcane*/ GROUP @1000
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @1098
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~iwdification/setup-iwdification.tp2~ 30) @24122
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 1500 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 1500 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 1500 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+LAF run STR_VAR file=iwdspells_arcane location=iwdspells END
+
+
+////////////////////////////////////////////////////////////////////
+
+BEGIN @24120 DESIGNATED 1510 /*LABEL dw_iwd_divine*/ GROUP @1000
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @1098
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~iwdification/setup-iwdification.tp2~ 40) @24122
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 1510 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 1510 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 1510 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+LAF run STR_VAR file=iwdspells_divine location=iwdspells END
+
+////////////////////////////////////////////////////////////////////
+
+BEGIN @24130 DESIGNATED 1520 /*LABEL dw_iwd_bard*/ GROUP @1000
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @1098
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~iwdification/setup-iwdification.tp2~ 50) @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 1520 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 1520 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 1520 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+LAF run STR_VAR file=iwdspells_bard location=iwdspells END
+
+
+//////////////////////////////////////////////////////////////////////////
+///	BG2 insects in IWD
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @24127 DESIGNATED 1600 GROUP @1000
+REQUIRE_PREDICATE GAME_IS iwdee @1099
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 1600 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 1600 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 1600 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+LAF run STR_VAR files=bg2spells_insect location=bg2spells END
+
+//////////////////////////////////////////////////////////////////////////
+///	BG2 Mordenkainen's Sword in IWD
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @24128 DESIGNATED 1610 GROUP @1000
+REQUIRE_PREDICATE GAME_IS iwdee @1099
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 1610 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 1610 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 1610 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+LAF run STR_VAR files=bg2spells_morsword location=bg2spells END
+
+//////////////////////////////////////////////////////////////////////////
+///	all tweaks
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1006 DESIGNATED 2000 GROUP @1000
+
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+LAF run STR_VAR file=install_spell_resources version=all location=spell END
+
+//////////////////////////////////////////////////////////////////////////
+///	core SCS tweaks
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1007 DESIGNATED 2010 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2010 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2010 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2010 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+LAF run STR_VAR file=install_spell_resources version=core-scs location=spell END
+
+//////////////////////////////////////////////////////////////////////////
+///	Baldur's Gate-inspired tweaks to Icewind Dale spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1008 DESIGNATED 2020 GROUP @1000
+REQUIRE_PREDICATE GAME_IS iwdee @1099
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2020 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2020 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2020 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+LAF run STR_VAR file=install_spell_resources version=bg location=spell END
+
+//////////////////////////////////////////////////////////////////////////
+///	Changes to Restoration
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1009 DESIGNATED 2030 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2030 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2030 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2030 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+LAF run STR_VAR file=install_spell_resources version=restoration location=spell END
+
+//////////////////////////////////////////////////////////////////////////
+///	Changes to shapeshift spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1010 DESIGNATED 2040 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2040 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2040 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2040 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+LAF run STR_VAR file=install_spell_resources version=shapeshift location=spell END
+
+//////////////////////////////////////////////////////////////////////////
+///	IWD-inspired changes to BG(2) spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1011 DESIGNATED 2050 GROUP @1000
+
+REQUIRE_PREDICATE !GAME_IS iwdee @1098
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2050 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2050 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2050 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+LAF run STR_VAR file=install_spell_resources version=iwd location=spell END
+
+//////////////////////////////////////////////////////////////////////////
+///	Rebalancings of slightly-too-powerful spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1012 DESIGNATED 2060 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2060 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2060 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2060 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+LAF run STR_VAR file=install_spell_resources version=rebalance location=spell END
+
+//////////////////////////////////////////////////////////////////////////
+///	spell school changes
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1013 DESIGNATED 2070 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2070 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2070 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2070 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+LAF run STR_VAR file=install_spell_resources version=school location=spell END
+
+//////////////////////////////////////////////////////////////////////////
+/// spells increased in power
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1014 DESIGNATED 2080 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2080 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2080 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2080 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+LAF run STR_VAR file=install_spell_resources version=boost location=spell END
+
+//////////////////////////////////////////////////////////////////////////
+/// New arcane spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1020 DESIGNATED 2500 GROUP @1000
+
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @1091
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2500 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2500 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2500 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+LAF run STR_VAR file=extra_arcane_spells location=newspell tra=extra_arcane_spells END
+
+//////////////////////////////////////////////////////////////////////////
+/// New divine spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1021 DESIGNATED 2510 GROUP @1000
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @1091
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2510 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2510 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2510 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+LAF run STR_VAR file=extra_divine_spells location=newspell tra=extra_divine_spells END
+
+//////////////////////////////////////////////////////////////////////////
+/// Revised elementals
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1022 DESIGNATED 2520 GROUP @1000
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @1091
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2520 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2520 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2520 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+FORBID_COMPONENT "setup-spell_rev.tp2" 0 @234
+
+LAF run STR_VAR file=elemental_cre location=elemental_cre END
+
+////////////////////////////////////////////////////////////
+/// end of Stratagems of Mystra shared section
+/////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////
+////////////////////////////////////
+///	Gameplay components
+///     (31 as of v35)
+////////////////////////////////////////////////////////////////////
+/////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+////	General item nerf
+///////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @50003 DESIGNATED 2900 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~item_rev/item_rev.tp2~ 0)=0 @3376
+
+LAF run STR_VAR files=global_item_nerf location=item END
+
+//////////////////////////////////////////////////////////////////////////
+///   Replace +1 arrows and other missiles with fine versions
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @16007 DESIGNATED 3010 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+LAF run STR_VAR files=fine_arrows location=item tra=fine_arrows END
+
+//////////////////////////////////////////////////////////////////////////
+///   Extra-healing potions
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @20008 DESIGNATED 3015 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR files=extra_healing location=gameplay tra=fine_arrows END
+
+//////////////////////////////////////////////////////////////////////////
+///   Elemental arrows
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @24129 DESIGNATED 3017 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee~ @16001
+
+LAF run STR_VAR files=elemental_arrows location=gameplay tra=spell END
+
+
+//////////////////////////////////////////////////////////////////////////
+///   Replace magic weapons with fine versions
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @35 DESIGNATED 3020 GROUP @4 // BG2 only
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16000
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~item_rev/item_rev.tp2~ 0) @3376
+
+LAF run STR_VAR files=fine_weapons location=item tra=fine_weapons END
+
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @20073 DESIGNATED 3021 GROUP @4 SUBCOMPONENT @36 // no-shatter
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~item_rev/item_rev.tp2~ 0) @3376
+
+LAF run STR_VAR files=~fine_weapons~ version=~no_shatter~ location=item tra=fine_weapons END
+
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @20072 DESIGNATED 3022 GROUP @4 SUBCOMPONENT @36 // shatter
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+LAF run STR_VAR files=~fine_weapons~ version=~shatter~ location=item tra=fine_weapons END
+
+
+//////////////////////////////////////////////////////////////////////////
+///   Reduce number of dispelling arrows in stores
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @3325  DESIGNATED 3040 GROUP @4 SUBCOMPONENT  @16005
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+LAF run STR_VAR files=~dispelling_arrows~ version=0 location=item tra=fine_weapons END
+
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @16006 DESIGNATED 3041 GROUP @4 SUBCOMPONENT @16005
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+LAF run STR_VAR files=~dispelling_arrows~ version=5 location=item tra=fine_weapons END
+
+
+///////////////////////////////////////////
+//  standardise BG1 spells
+////////////////////////////////////////////
+
+BEGIN @20074 DESIGNATED 3500 GROUP @4 SUBCOMPONENT @20076 (GAME_IS ~tutu tutu_totsc~) //Remove BG2-only spells
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE GAME_IS "bgee eet bgt tutu tutu_totsc" @16001
+REQUIRE_PREDICATE (GAME_IS ~bgt tutu tutu_totsc~) @15999
+
+LAF run STR_VAR files=standardise_bg1_spells version=bg1 location=gameplay END
+
+////////////////////////////////////////////
+
+BEGIN @20077 DESIGNATED 3501 GROUP @4 SUBCOMPONENT @20076  //Add BG2 spells
+
+LAF run STR_VAR files=standardise_bg1_spells version=bg2 location=gameplay END
+
+//////////////////////////////////////////////////////////////////////////
+///	Wider range of random spell scrolls
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @20094 DESIGNATED 3505 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+REQUIRE_PREDICATE GAME_IS "bgee bg2ee eet" @16002
+
+LAF run STR_VAR files=random_scrolls location=gameplay END
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Better IWD scroll placements
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @20096 DESIGNATED 3510  GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE GAME_IS "iwdee" @50008
+
+
+LAF run STR_VAR file=iwdscroll location=iwdscroll END
+
+//////////////////////////////////////////////////////////////////////////
+///	Nerf Inquisitors
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @170 DESIGNATED 3540 GROUP @4 SUBCOMPONENT @169
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+LAF run STR_VAR files=~inquisitor~ version=~one_point_five~ location=gameplay END
+
+////////////////////////////////////////////////////
+
+BEGIN @171 DESIGNATED 3541 GROUP @4 SUBCOMPONENT @169
+
+LAF run STR_VAR files=~inquisitor~ version=~two~ location=gameplay END
+
+//////////////////////////////////////////////////////////////////////////
+///	Improved healing
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @227 DESIGNATED 3550 LABEL dw_improved_healing_1 GROUP @4 SUBCOMPONENT @226 DEPRECATED @50013
+
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @228 DESIGNATED 3551 LABEL dw_improved_healing_2 GROUP @4 SUBCOMPONENT @226
+
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @229 DESIGNATED 3552 LABEL dw_improved_healing_3 GROUP @4 SUBCOMPONENT @226
+
+//////////////////////////////////////////////////////////////////////////
+///	Restoration restores ability drain
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @233 DESIGNATED 3580 LABEL dw_restoration_ability_drain GROUP @4 DEPRECATED @50013
+
+////////////////////////////////////////////////////////////////////////////
+//Faster bears
+////////////////////////////////////////////////////////////////////////////
+
+BEGIN @166 DESIGNATED 4000 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+LAF run STR_VAR files=~fast_bears~ location=gameplay END
+
+////////////////////////////////////////////////////////////////////////////////////////
+///    More realistic wolves/dogs
+////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @24118 DESIGNATED 4020 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR files=~realistic_wolves~ location=gameplay END
+
+///////////////////////////////////////////////////////////////////
+ //Improved shapeshifting
+///////////////////////////////////////////////////////////////////
+
+BEGIN @3333 DESIGNATED 4030 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 41000) @50014
+ 
+
+LAF run STR_VAR files=~shapeshift~ location=gameplay tra=shapeshift version=0 END
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	Slow reputation increase
+////////////////////////////////////////////////////////////////////////////////////////
+
+// 2/3 normal rate
+
+BEGIN @3380 DESIGNATED 4050 GROUP @4 SUBCOMPONENT @3379
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 41000) @50014
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+
+LAF run INT_VAR STR_VAR files=reputation version=two_thirds location=gameplay END
+
+//////////////////////////////////////////////////
+
+// 1/2 normal rate
+
+BEGIN @3381 DESIGNATED 4051 GROUP @4 SUBCOMPONENT @3379
+
+LAF run STR_VAR files=reputation version=one_half location=gameplay END
+
+//////////////////////////////////////////////////
+
+// 1/3 normal rate
+
+BEGIN @3382 DESIGNATED 4052 GROUP @4 SUBCOMPONENT @3379
+
+LAF run INT_VAR STR_VAR files=reputation version=one_third location=gameplay END
+
+//////////////////////////////////////////////////
+
+// 1/4 normal rate
+
+BEGIN @3383  DESIGNATED 4093 GROUP @4 SUBCOMPONENT @3379
+
+LAF run INT_VAR  STR_VAR files=reputation version=one_fourth location=gameplay END
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	Level-zero NPCs - vanilla version
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20010 DESIGNATED 4099 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+
+REQUIRE_PREDICATE (GAME_IS ~bgt eet tutu tutu_totsc bgee~) @16001
+REQUIRE_PREDICATE !GAME_IS ~bgee eet~ @15999
+LAF run STR_VAR files=npc_proficiencies location=gameplay END
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	Level-zero NPCs - EE version
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20013 DESIGNATED 4100 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE GAME_IS "iwdee bgee bg2ee eet" @16002
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+FORBID_COMPONENT "setup-cdtweaks.tp2" 2370 @50010
+FORBID_COMPONENT "setup-cdtweaks.tp2" 2372 @50010
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 4115) && !IS_AN_INT stratagems_component_4115_installed && !(MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 90100) @15998
+FORBID_COMPONENT "dw_talents.tp2" 60300 @50015
+
+LAF run STR_VAR files=leveller location=leveller END
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	Thief skill accelerator
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @232 DESIGNATED 4115 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE GAME_IS "bgee bg2ee eet iwdee" @16002
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 90100) @50015
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 4100) && !IS_AN_INT stratagems_component_4100_installed @1090
+
+LAF run STR_VAR files=accelerate_thief_levelling location=gameplay END
+
+//////////////////////////////////////////////////////////////////////////////////////
+// Revise perma-death
+//////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3401 DESIGNATED 4130 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet~) @2002
+FORBID_COMPONENT "setup-spell_rev.tp2" 0 @234
+
+LAF run STR_VAR files=resurrection location=gameplay END
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	revised resting rules
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3402 DESIGNATED 4135 GROUP @4 
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet~) @2002
+
+LAF run STR_VAR files=camping location=gameplay END
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	revised inns
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3403 DESIGNATED 4140 GROUP @4 
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @1091
+
+LAF run STR_VAR files=inns location=gameplay END
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+//// Skip Candlekeep
+//////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @16029 DESIGNATED 4145 GROUP @4  SUBCOMPONENT  @16028
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR files=skip_candlekeep version=notutors location=gameplay END
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @16030 DESIGNATED 4146 GROUP @4  SUBCOMPONENT  @16028
+
+LAF run STR_VAR files=skip_candlekeep version=classic location=gameplay END
+
+//////////////////////////////////////////
+//// Extend area requiring a mage license
+//////////////////////////////////////////
+
+BEGIN @3372 DESIGNATED 4150 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR files=license_range location=gameplay END
+
+//////////////////////////////////////////
+///// Higher cost for a mage license
+//////////////////////////////////////////////
+
+BEGIN @3367  DESIGNATED 4160 GROUP @4 SUBCOMPONENT @3366
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR files=license_cost version=10 location=gameplay END
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3368 DESIGNATED 4161 GROUP @4 SUBCOMPONENT @3366
+
+LAF run STR_VAR files=license_cost version=15 location=gameplay END
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3369 DESIGNATED 4162 GROUP @4 SUBCOMPONENT @3366
+/// --- /// DEFAULT_CHOICE
+
+LAF run STR_VAR files=license_cost version=20 location=gameplay END
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3370 DESIGNATED 4163 GROUP @4 SUBCOMPONENT @3366
+
+LAF run STR_VAR files=license_cost version=30 location=gameplay END
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3371 DESIGNATED 4164 GROUP @4 SUBCOMPONENT @3366
+
+LAF run STR_VAR files=license_cost version=50 location=gameplay END
+
+//////////////////////////////////////////
+///// Higher cost to get to Spellhold
+//////////////////////////////////////////////
+
+BEGIN @42 DESIGNATED 4170 GROUP @4 SUBCOMPONENT @41
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+LAF run STR_VAR files=spellhold_cost version=40 location=gameplay END
+
+///////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @43 DESIGNATED 4171 GROUP @4 SUBCOMPONENT @41
+
+LAF run STR_VAR files=spellhold_cost version=60 location=gameplay END
+
+///////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @44 DESIGNATED 4172 GROUP @4 SUBCOMPONENT @41
+
+LAF run STR_VAR files=spellhold_cost version=80 location=gameplay END
+
+///////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @45 DESIGNATED 4173 GROUP @4 SUBCOMPONENT @41
+/// --- /// DEFAULT_CHOICE
+
+LAF run STR_VAR files=spellhold_cost version=100 location=gameplay END
+
+///////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @46 DESIGNATED 4174 GROUP @4 SUBCOMPONENT @41
+
+LAF run STR_VAR files=spellhold_cost version=120 location=gameplay END
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//// Early access to Watchers' Keep
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @49 DESIGNATED 4190 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR files=wk_early location=gameplay END
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//	Randomise teleport maze
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3365 DESIGNATED 4210 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR files=teleport_maze location=gameplay END
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//	No-chimp
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @47 DESIGNATED 4215 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR files=no_chimp location=gameplay END
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//	No-ammo
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3321 DESIGNATED 4216 SUBCOMPONENT @48 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR files=no_ammo version=0 location=gameplay END
+
+//////////////////
+
+BEGIN @3322 DESIGNATED 4217 SUBCOMPONENT @48 GROUP @4
+
+LAF run STR_VAR files=no_ammo version=1 location=gameplay END
+
+//////////////////
+
+BEGIN @3323 DESIGNATED 4218 SUBCOMPONENT @48 GROUP @4
+
+LAF run STR_VAR files=no_ammo version=2 location=gameplay END
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	Delay bonus merchants
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3373 DESIGNATED 4230 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR files=bonus_merchant location=gameplay END
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	HLAs as innate
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3397 DESIGNATED 4240 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+FORBID_COMPONENT "setup-spell_rev.tp2" 0 @230
+REQUIRE_PREDICATE (!MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 60200) @50015
+
+LAF run STR_VAR files=hla_innate location=gameplay END
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	sequencers as innate
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3400 DESIGNATED 4250 GROUP @4 
+
+//REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE !FILE_EXISTS_IN_GAME "qdtnb_metamagic.qd" @231
+
+LAF run STR_VAR files=innate_triggers location=gameplay tra=spell END
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	ease-of-use AI
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @7 DESIGNATED 5000 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+
+LAF run INT_VAR literal=1 STR_VAR files=ease_of_use_ai location=gameplay END
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Make Stoneskin invisible
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @3351 DESIGNATED 5070 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE ENGINE_IS ~tob~ @2000
+REQUIRE_PREDICATE FILE_EXISTS "bgmain.exe" @2000
+REQUIRE_PREDICATE !FILE_CONTAINS_EVALUATED (~tobex_ini/ToBExTweak.ini~ ~Disable Stoneskin Grey Colour=1~) @3391
+
+LAF run STR_VAR files=~stoneskin_invisible~ location=gameplay END
+
+//////////////////////////////////////////////////////////////////////////
+///	Improved TotSC cutscenes
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @24125 DESIGNATED 5080 GROUP @4
+REQUIRE_PREDICATE GAME_IS "bgee bg2ee eet" @16002
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR files=~totsc_textscreens~ location=gameplay END
+
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+///	AI enhancements
+/// (25 as of v32)
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+//// AI setup
+//// INSIST this remains 5900
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @16024 DESIGNATED 5900 GROUP @6
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+
+LAF run STR_VAR files=initial location=initial END
+
+///////////////////////////////////////////////////////////////////////////////
+//Improved General AI
+//
+// INSIST this remains 6000
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @61 DESIGNATED 6000 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+
+LAF run STR_VAR files=genai location=genai END
+
+///////////////////////////////////////////////////////////////////////////////
+//Better Calls for Help
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @62 DESIGNATED 6010 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+
+LAF run STR_VAR files=help location=help END
+
+///////////////////////////////////////////////////////////////////////////////
+//IWD improved AI/better calls for help
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @64 DESIGNATED 6020 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS iwdee @50008
+
+LAF run STR_VAR files=genai_iwd location=genai END
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Smarter Mages
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @80 DESIGNATED 6030 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+
+LAF run STR_VAR files=mage location=mage END
+
+///////////////////////////////////////////////////////////////////////////////
+//Smarter Priests
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @84 DESIGNATED 6040 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+
+LAF run STR_VAR files=priest location=priest END
+
+///////////////////////////////////////////////////////////////////////////////
+//Potions for NPCs
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @159 DESIGNATED 6100 GROUP @6
+//REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+//REQUIRE_PREDICATE (MOD_IS_INSTALLED "setup-stratagems.tp2" 6000 || IS_AN_INT stratagems_component_6000_installed || MOD_IS_INSTALLED "setup-stratagems.tp2" 6020 || IS_AN_INT stratagems_component_6020_installed) @3350
+
+LAF run STR_VAR files=potion location=potion END
+
+///////////////////////////////////////////////////////////////////////////////
+// Spiders
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @160 DESIGNATED 6200 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR files=spider location=ai END
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// BG1-specific
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter dryads and sirines
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20028 DESIGNATED 6300 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+LAF run STR_VAR files=sirine_dryad location=ai END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Marginally less dumb carrion crawlers
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20029 DESIGNATED 6310 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6000 || IS_AN_INT stratagems_component_6000_installed @3350
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR files=crawler location=ai END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter basilisks
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20030 DESIGNATED 6320 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+LAF run STR_VAR files=basilisk location=ai END
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// BG2-specific
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+///  "Smarter" Golems
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3374 DESIGNATED 6500 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !(GAME_IS ~tutu tutu_totsc bgee~) @16000
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+
+LAF run STR_VAR files=golem location=ai END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved Fiends and Celestials
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @63 DESIGNATED 6510 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR files=fiend location=fiend END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter Genies
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @69 DESIGNATED 6520 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+
+LAF run STR_VAR files=genie location=genie END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter Dragons
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @72 DESIGNATED 6540 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR files=dragon location=dragon END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter Beholders
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @75 DESIGNATED 6550 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR files=beholder location=beholder END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter Illithids
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @78 DESIGNATED 6560 GROUP @6  // inv-by-script
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+LAF run STR_VAR files=illithid location=psionic END
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///	GITHYANKI
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @151 DESIGNATED 6570 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6000 || IS_AN_INT stratagems_component_6000_installed @3350
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+LAF run STR_VAR file=gith location=psionic END
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///	vampires
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @187 DESIGNATED 6580 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+LAF run STR_VAR file=vampire location=vampire END
+
+///////////////////////////////////////////////////////////////////////////////
+///// melissan
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3209 DESIGNATED 6590 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+LAF run STR_VAR file=melissan location=melissan END
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///	UNDEAD
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @85 DESIGNATED 6700 GROUP @6
+REQUIRE_PREDICATE GAME_IS iwdee @1099
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+
+
+LAF run STR_VAR file=undead location=undead END
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+//////     ASCENSION-ONLY COMPONENTS
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Smarter Illasera
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3306 DESIGNATED 6800 GROUP @6
+
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~illas01.itm~ @3309
+
+OUTER_SPRINT component_loc ascension
+LAF run STR_VAR file=illasera location=ascension END
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Smarter Gromnir
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3312 DESIGNATED 6810 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~jumjum.bcs~ || FILE_EXISTS_IN_GAME ~fingrom.cre~) @3313
+
+LAF run STR_VAR file=gromnir location=ascension END
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Smarter Yaga-Shura
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3307 DESIGNATED 6820 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~yagaft.bcs~ || FILE_EXISTS_IN_GAME finyaga.cre) @3310
+
+LAF run STR_VAR file=yagashura location=ascension END
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Smarter Abazigal
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3308 DESIGNATED 6830 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~abazdg02.cre~ || FILE_EXISTS_IN_GAME ~finabaz.cre~) @3314
+
+LAF run STR_VAR file=abazigal location=ascension END
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Smarter Ascension Irenicus/Sendai
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3324 DESIGNATED 6840 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6030 || IS_AN_INT stratagems_component_6030_installed @16045
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~fingrom.cre~ @3314
+
+LAF run STR_VAR file=sendai_irenicus location=ascension END
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Ascension fiends get SCS scripting
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3315 DESIGNATED 6850 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @3316
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6510 || IS_AN_INT stratagems_component_6510_installed @3316
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~fingrom.cre~ @3314
+
+LAF run STR_VAR file=ascension_fiends location=ascension END
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// TACTICAL CHALLENGES  - BG1
+// 20 components as of v32
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+///  Doppelgangers
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20031 DESIGNATED 7000 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=doppelganger location=tactical_bg1 tra=doppelganger END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Black Talons
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20033 DESIGNATED 7010 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=blacktalon  location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Random assassins
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20070 DESIGNATED 7020 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=c3assassin  location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Kobolds
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20027 DESIGNATED 7030 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=kobold location=kobold END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Ogre assassins
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20034 DESIGNATED 7040 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=ogreassassin  location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Ulcaster
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20035 DESIGNATED 7050 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=ulcaster location=ulcaster END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Werewolf island
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20036 DESIGNATED 7060 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=werewolf location=werewolf END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Durlag's Tower
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20037 DESIGNATED 7070 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=durlag location=durlag END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Demon cult
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20038 DESIGNATED 7080 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=demoncult location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Druids
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20089 DESIGNATED 7090 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6040 || IS_AN_INT stratagems_component_6040_installed @16047
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=cloakwood_druid location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Bassilus
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20090 DESIGNATED 7100 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=bassilus location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Drasus
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20091 DESIGNATED 7110 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=drasus location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Red wizards
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20092 DESIGNATED 7130 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6030 || IS_AN_INT stratagems_component_6030_installed @16046
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=redwizard location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Iron Throne in undercity
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20093 DESIGNATED 7140 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=c7throne location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Carsa and Kahrk
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @24126 DESIGNATED 7150 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=carsa location=tactical_bg1 END
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved C2 end-battle
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20042 DESIGNATED 7200 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=c2end location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved C3 end-battle
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20043 DESIGNATED 7210 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=c3end location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved C4 end-battle
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20044 DESIGNATED 7220 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=c4end location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved C5 end-battle
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20045 DESIGNATED 7230 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=c5end location=tactical_bg1 END
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved C7 end-battle
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20047 DESIGNATED 7250 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=sarevok location=sarevok END
+
+///////////////////////////////////////////////////////////////////////////////
+///  BG1 misc
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20039 DESIGNATED 7900 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+LAF run STR_VAR file=minor_bg1 location=tactical_bg1 END
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// TACTICAL CHALLENGES  - BG2
+// 18 components as of v32
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved starting dungeon
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3334 DESIGNATED 8000 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=startingdungeon location=tactical_bg2 END
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved shade lord
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @172 DESIGNATED 8010 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=shadelord location=tactical_bg2 END
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Spellcasting demiliches
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+BEGIN @192 DESIGNATED 8020 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6030 || IS_AN_INT stratagems_component_6030_installed @16046
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=demilich location=demilich version=old END
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Increased difficulty of random spawns
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @154 DESIGNATED 8040 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=spawn location=tactical_bg2 END
+
+///////////////////////////////////////////////////////////////////////////////////////
+///	Improved random encounters
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @191 DESIGNATED 8050 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=random location=tactical_bg2 END
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved d'Arnise keep
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @158 DESIGNATED 8060 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=darnise location=tactical_bg2 END
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved Unseeing Eye
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3398 DESIGNATED 8070 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6550 || IS_AN_INT stratagems_component_6550_installed @3399
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6030 || IS_AN_INT stratagems_component_6030_installed @16046
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=unseeingeye location=tactical_bg2  END
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved Bodhi
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @188 DESIGNATED 8080 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6580 || IS_AN_INT stratagems_component_6580_installed @16049
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=bodhi location=bodhi  END
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved Bodhi for Ascension
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @189 DESIGNATED 8085 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 8080 || IS_AN_INT stratagems_component_6580_installed @190
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~fingrom.cre~ @3314
+
+LAF run STR_VAR file=bodhi_ascension location=bodhi tra=bodhi END
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Spellhold items are stolen
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @181 DESIGNATED 8090 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+
+
+LAF run STR_VAR file=spellholditems location=spellholditems  END
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Improved battle with Irenicus in Spellhold
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3357 DESIGNATED 8100 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=spellhold_irenicus location=tactical_bg2  END
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Improved sahuagin
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @194 DESIGNATED 8110 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+OUTER_SPRINT component_loc tactical_bg2
+LAF run STR_VAR file=sahuagin location=tactical_bg2  END
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Improved beholder lair
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3317 DESIGNATED 8120 GROUP @16056
+
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=beholder_hive location=tactical_bg2 END
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Rebalanced troll regeneration
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @155 DESIGNATED 8130 GROUP @16056
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE GAME_IS "bgee bg2ee eet" @16002
+
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+
+LAF run STR_VAR file=pf_trolls location=tactical_bg2 END
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved drow
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @199 DESIGNATED 8140 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=drow location=drow END
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Watcher's Keep
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @200 DESIGNATED 8150 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=watchers_keep location=tactical_bg2  END
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Fire Giants
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @180 DESIGNATED 8160 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=firegiant location=firegiant  END
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Sendai's enclave
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @161 DESIGNATED 8170 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=sendai location=sendai  END
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////   Abazigal's Lair
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @173 DESIGNATED 8180 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=abazigal_enclave location=abazigal  END
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////   Catch-all
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3203 DESIGNATED 8190 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+LAF run STR_VAR file=minor_bg2 location=tactical_bg2 END
+
+
+
+/*
+//////////////////////////////////////////////////////////////////////////
+//   BG2 resource collector
+//////////////////////////////////////////////////////////////////////////
+
+BEGIN "collect BG2 resources" DESIGNATED 100000
+REQUIRE_PREDICATE FILE_EXISTS "dw#test_component_active.mrk" "For internal use only"
+REQUIRE_PREDICATE GAME_IS bg2ee "Run on BG2EE"
+LAF run STR_VAR files=collect_bg2_resources location=iwdspells END
+
+//////////////////////////////////////////////////////////////////////////
+//   IWD resource collector
+//////////////////////////////////////////////////////////////////////////
+
+BEGIN "collect IWD resources" DESIGNATED 200000
+REQUIRE_PREDICATE FILE_EXISTS "dw#test_component_active.mrk" "For internal use only"
+REQUIRE_PREDICATE GAME_IS iwdee "Run on IWDEE"
+LAF run STR_VAR files=collect_iwd_resources location=iwdspells END
+
+*/

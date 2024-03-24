@@ -1,0 +1,1837 @@
+BACKUP ~weidu_external/backup/stratagems~
+AUTHOR ~For help troubleshooting installation problems, go to the Sword Coast Stratagems forum at gibberlings3.net.~
+//MODDER setup_tra none area_variables none missing_extern none missing_resref none ict2_actions none missing_eval none overwriting_file none fun_args warn
+VERSION ~35.10~
+README ~stratagems/doc/readme-stratagems.html~
+AUTO_EVAL_STRINGS
+
+ALWAYS
+    OUTER_SPRINT %MOD_FOLDER% "stratagems"
+	OUTER_SET SFO_batch_mode_component_number=100
+    INCLUDE ~stratagems/sfo2e/batch_mode.tpc~
+    INCLUDE ~stratagems/lib/always.tph~
+END
+
+////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+////	Language commands - checks the workspace version too
+////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////
+
+LANGUAGE
+"English"
+ENGLISH
+ 
+ ~stratagems/lang/english/setup.tra~
+ 
+
+LANGUAGE
+"Espanol (ElGamerViejuno) - last updated version 35.4"
+SPANISH
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/spanish/setup.tra~
+
+LANGUAGE
+"Polski (Yarpen) - last updated version 34.3"
+POLISH
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/polish/setup.tra~
+
+ LANGUAGE
+"Czech (Vicq) - last updated version 34.3"
+CZECH
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/czech/setup.tra~
+
+LANGUAGE
+"Deutsch (Leonardo Watson/YChap) - last updated version 35.7"
+GERMAN
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/german/setup.tra~
+
+LANGUAGE
+"Francais (Mornagest/Isaya/Graoumf/Gwendolyne/Jazira) - last updated version 34.2"
+FRENCH
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/french/setup.tra~
+
+
+ LANGUAGE
+"Italiano (Stoneangel/Improbabile) - last updated version 34.3"
+ITALIAN
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/italian/setup.tra~
+
+ LANGUAGE
+"Russian (Prowler/Silent/RealApxu) - last updated version 35.1"
+RUSSIAN
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/russian/setup.tra~
+
+// Korean translation commented out as it's very out-of-date
+
+/*
+ LANGUAGE
+"Korean (Menocu)"
+KOREAN
+ ~stratagems/lang/english/setup.tra~
+ ~stratagems/lang/korean/setup.tra~
+*/
+
+
+  LANGUAGE
+"Simplified Chinese (c4_angel/www.trow.cc &  Lewis Liu) - last updated version 35.7"
+SCHINESE
+ ~stratagems/lang/schinese/setup.tra~
+
+
+/*
+LANGUAGE
+"Testing language for tra-copying games, no strings at all"
+EMPTY_LANGUAGE
+*/
+
+///////////////////////////////////////////////////////////////////
+////////////////////////////////////
+///	Test space
+////////////////////////////////////////////////////////////////////
+/////////////////////////////////////
+
+
+/*
+BEGIN test LABEL dw_scs DESIGNATED 0
+REQUIRE_PREDICATE FILE_EXISTS "dw#test_component_active.mrk" "For internal use only"
+
+
+*/
+
+
+///////////////////////////////////////////////////////////////////
+////////////////////////////////////
+///	Batch mode
+////////////////////////////////////////////////////////////////////
+/////////////////////////////////////
+
+BEGIN @10005 DESIGNATED 100 NO_LOG_RECORD
+
+///////////////////////////////////////////////////////////////////
+////////////////////////////////////
+///	Stratagems of Mystra (spell tweaks and new spells)
+/// 
+///	17 components as of 8-2023
+////////////////////////////////////////////////////////////////////
+/////////////////////////////////////
+
+BEGIN @24119 LABEL dw_iwd_arcane DESIGNATED 1500 /*LABEL dw_iwd_arcane*/ GROUP @1000
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @1098
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~iwdification/setup-iwdification.tp2~ 30) @24122
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 1500 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 1500 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 1500 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+
+
+
+////////////////////////////////////////////////////////////////////
+
+BEGIN @24120 LABEL dw_iwd_divine DESIGNATED 1510 /*LABEL dw_iwd_divine*/ GROUP @1000
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @1098
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~iwdification/setup-iwdification.tp2~ 40) @24122
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 1510 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 1510 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 1510 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+
+
+////////////////////////////////////////////////////////////////////
+
+BEGIN @24130 LABEL dw_iwd_bard DESIGNATED 1520 /*LABEL dw_iwd_bard*/ GROUP @1000
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @1098
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~iwdification/setup-iwdification.tp2~ 50) @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 1520 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 1520 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 1520 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	BG2 insects in IWD
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @24127 LABEL dw_scs_bg2_insects_in_iwd DESIGNATED 1600 GROUP @1000
+REQUIRE_PREDICATE GAME_IS iwdee @1099
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 1600 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 1600 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 1600 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	BG2 Mordenkainen's Sword in IWD
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @24128 LABEL dw_scs_bg2_mordenkainen_in_iwd DESIGNATED 1610 GROUP @1000
+REQUIRE_PREDICATE GAME_IS iwdee @1099
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 1610 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 1610 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 1610 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	all tweaks
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1006 LABEL dw_scs_all_tweaks DESIGNATED 2000 GROUP @1000
+
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	core SCS tweaks
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1007 LABEL dw_scs_core_tweaks DESIGNATED 2010 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2010 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2010 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2010 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Baldur's Gate-inspired tweaks to Icewind Dale spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1008 LABEL dw_scs_tweaks_to_iwd_spells DESIGNATED 2020 GROUP @1000
+REQUIRE_PREDICATE GAME_IS iwdee @1099
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2020 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2020 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2020 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Changes to Restoration
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1009 LABEL dw_scs_changes_to_restoration DESIGNATED 2030 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2030 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2030 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2030 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Changes to shapeshift spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1010 LABEL dw_scs_changes_to_shapeshift_spells DESIGNATED 2040 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2040 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2040 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2040 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	IWD-inspired changes to BG(2) spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1011 LABEL dw_scs_iwd_inspired_changes_to_bg2_spells DESIGNATED 2050 GROUP @1000
+
+REQUIRE_PREDICATE !GAME_IS iwdee @1098
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2050 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2050 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2050 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Rebalancings of slightly-too-powerful spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1012 LABEL dw_scs_rebalancing_too_powerful_spells DESIGNATED 2060 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2060 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2060 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2060 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	spell school changes
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1013 LABEL dw_scs_spell_school_changes DESIGNATED 2070 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2070 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2070 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2070 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+
+
+//////////////////////////////////////////////////////////////////////////
+/// spells increased in power
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1014 LABEL dw_scs_spells_increased_in_power DESIGNATED 2080 GROUP @1000
+
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2000 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2000 @1090
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2080 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2080 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2080 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+REQUIRE_PREDICATE !IS_AN_INT stratagems_component_2000_installed @1090
+
+
+
+//////////////////////////////////////////////////////////////////////////
+/// New arcane spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1020 LABEL dw_scs_new_arcane_spells DESIGNATED 2500 GROUP @1000
+
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @1091
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2500 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2500 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2500 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+
+
+//////////////////////////////////////////////////////////////////////////
+/// New divine spells
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1021 LABEL dw_scs_new_divine_spells DESIGNATED 2510 GROUP @1000
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @1091
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2510 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2510 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2510 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+
+
+
+//////////////////////////////////////////////////////////////////////////
+/// Revised elementals
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @1022 LABEL dw_scs_revised_elementals DESIGNATED 2520 GROUP @1000
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @1091
+//REQUIRE_PREDICATE !MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 2520 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_som/dw_som.tp2~ 2520 @1090
+REQUIRE_PREDICATE !MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 2520 @1090
+FORBID_COMPONENT ~stratagems/setup-stratagems.tp2~ 5900 @2001
+FORBID_COMPONENT "setup-spell_rev.tp2" 0 @234
+
+
+
+////////////////////////////////////////////////////////////
+/// end of Stratagems of Mystra shared section
+/////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////
+////////////////////////////////////
+///	Gameplay components
+///     (31 as of v35)
+////////////////////////////////////////////////////////////////////
+/////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////
+////	General item nerf
+///////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @50003 LABEL dw_scs_reneral_item_nerf DESIGNATED 2900 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE (MOD_IS_INSTALLED ~item_rev/item_rev.tp2~ 0)=0 @3376
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///   Replace +1 arrows and other missiles with fine versions
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @16007 LABEL dw_scs_replace_plus_1_arrows DESIGNATED 3010 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///   Extra-healing potions
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @20008 LABEL dw_scs_extra_healing_potions DESIGNATED 3015 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///   Elemental arrows
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @24129 LABEL dw_scs_elemental_arrows DESIGNATED 3017 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee~ @16001
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///   Replace magic weapons with fine versions
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @35 LABEL dw_scs_replace_magic_weapons_with_fine_versions_bg2_only DESIGNATED 3020 GROUP @4 // BG2 only
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16000
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~item_rev/item_rev.tp2~ 0) @3376
+
+
+
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @20073 LABEL dw_scs_replace_magic_weapons_with_fine_versions_no_shatter DESIGNATED 3021 GROUP @4 SUBCOMPONENT @36 // no-shatter
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~item_rev/item_rev.tp2~ 0) @3376
+
+
+
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @20072 LABEL dw_scs_replace_magic_weapons_with_fine_versions_shatter DESIGNATED 3022 GROUP @4 SUBCOMPONENT @36 // shatter
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///   Reduce number of dispelling arrows in stores
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @3325  LABEL dw_scs_reduce_number_of_dispelling_arrows_in_stores_0 DESIGNATED 3040 GROUP @4 SUBCOMPONENT  @16005
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+
+
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @16006 LABEL dw_scs_reduce_number_of_dispelling_arrows_in_stores_5 DESIGNATED 3041 GROUP @4 SUBCOMPONENT @16005
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+
+
+
+///////////////////////////////////////////
+//  standardise BG1 spells
+////////////////////////////////////////////
+
+BEGIN @20074 LABEL dw_scs_standardise_bg1_spells_bg1 DESIGNATED 3500 GROUP @4 SUBCOMPONENT @20076 (GAME_IS ~tutu tutu_totsc~) //Remove BG2-only spells
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE GAME_IS "bgee eet bgt tutu tutu_totsc" @16001
+REQUIRE_PREDICATE (GAME_IS ~bgt tutu tutu_totsc~) @15999
+
+
+
+////////////////////////////////////////////
+
+BEGIN @20077 LABEL dw_scs_standardise_bg1_spells_bg2 DESIGNATED 3501 GROUP @4 SUBCOMPONENT @20076  //Add BG2 spells
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Wider range of random spell scrolls
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @20094 LABEL dw_scs_add_random_spell_scrolls DESIGNATED 3505 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+REQUIRE_PREDICATE GAME_IS "bgee bg2ee eet" @16002
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Better IWD scroll placements
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @20096 LABEL dw_scs_better_iwd_scroll_placements DESIGNATED 3510  GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE GAME_IS "iwdee" @50008
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Nerf Inquisitors
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @170 LABEL dw_scs_nerf_inquisitors_one_point_five DESIGNATED 3540 GROUP @4 SUBCOMPONENT @169
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+
+
+////////////////////////////////////////////////////
+
+BEGIN @171 LABEL dw_scs_nerf_inquisitors_two DESIGNATED 3541 GROUP @4 SUBCOMPONENT @169
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Improved healing
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @227 DESIGNATED 3550 LABEL dw_improved_healing_1 GROUP @4 SUBCOMPONENT @226 DEPRECATED @50013
+
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @228 DESIGNATED 3551 LABEL dw_improved_healing_2 GROUP @4 SUBCOMPONENT @226
+
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @229 DESIGNATED 3552 LABEL dw_improved_healing_3 GROUP @4 SUBCOMPONENT @226
+
+//////////////////////////////////////////////////////////////////////////
+///	Restoration restores ability drain
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @233 DESIGNATED 3580 LABEL dw_restoration_ability_drain GROUP @4 DEPRECATED @50013
+
+////////////////////////////////////////////////////////////////////////////
+//Faster bears
+////////////////////////////////////////////////////////////////////////////
+
+BEGIN @166 LABEL dw_scs_faster_bears DESIGNATED 4000 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+///    More realistic wolves/dogs
+////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @24118 LABEL dw_scs_more_realistic_wolves_dogs DESIGNATED 4020 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////
+ //Improved shapeshifting
+///////////////////////////////////////////////////////////////////
+
+BEGIN @3333 LABEL dw_scs_improved_shapeshifting DESIGNATED 4030 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 41000) @50014
+ 
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	Slow reputation increase
+////////////////////////////////////////////////////////////////////////////////////////
+
+// 2/3 normal rate
+
+BEGIN @3380 LABEL dw_scs_slow_reputation_increas_two_thirds DESIGNATED 4050 GROUP @4 SUBCOMPONENT @3379
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 41000) @50014
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+
+
+
+//////////////////////////////////////////////////
+
+// 1/2 normal rate
+
+BEGIN @3381 LABEL dw_scs_slow_reputation_increas_two_thirds_one_half DESIGNATED 4051 GROUP @4 SUBCOMPONENT @3379
+
+
+
+//////////////////////////////////////////////////
+
+// 1/3 normal rate
+
+BEGIN @3382 LABEL dw_scs_slow_reputation_increas_two_thirds_one_third DESIGNATED 4052 GROUP @4 SUBCOMPONENT @3379
+
+
+
+//////////////////////////////////////////////////
+
+// 1/4 normal rate
+
+BEGIN @3383  LABEL dw_scs_slow_reputation_increas_two_thirds_one_fourth DESIGNATED 4093 GROUP @4 SUBCOMPONENT @3379
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	Level-zero NPCs - vanilla version
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20010 LABEL dw_scs_Level_zero_npc_vanilla_version DESIGNATED 4099 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+
+REQUIRE_PREDICATE (GAME_IS ~bgt eet tutu tutu_totsc bgee~) @16001
+REQUIRE_PREDICATE !GAME_IS ~bgee eet~ @15999
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	Level-zero NPCs - EE version
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20013 LABEL dw_scs_Level_zero_npc_ee_version DESIGNATED 4100 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE GAME_IS "iwdee bgee bg2ee eet" @16002
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+FORBID_COMPONENT "setup-cdtweaks.tp2" 2370 @50010
+FORBID_COMPONENT "setup-cdtweaks.tp2" 2372 @50010
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 4115) && !IS_AN_INT stratagems_component_4115_installed && !(MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 90100) @15998
+FORBID_COMPONENT "dw_talents.tp2" 60300 @50015
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	Thief skill accelerator
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @232 LABEL dw_scs_thief_skill_accelerator DESIGNATED 4115 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE GAME_IS "bgee bg2ee eet iwdee" @16002
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 90100) @50015
+REQUIRE_PREDICATE !(MOD_IS_INSTALLED ~stratagems/setup-stratagems.tp2~ 4100) && !IS_AN_INT stratagems_component_4100_installed @1090
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+// Revise perma-death
+//////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3401 LABEL dw_scs_revise_perma_death DESIGNATED 4130 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet~) @2002
+FORBID_COMPONENT "setup-spell_rev.tp2" 0 @234
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	revised resting rules
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3402 LABEL dw_scs_revised_resting_rules DESIGNATED 4135 GROUP @4 
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet~) @2002
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	revised inns
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3403 LABEL dw_scs_revised_inns DESIGNATED 4140 GROUP @4 
+
+REQUIRE_PREDICATE (GAME_IS ~bgee bg2ee eet iwdee~) @1091
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+//// Skip Candlekeep
+//////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @16029 LABEL dw_scs_remove_tutorial_npcs_from_candlekee DESIGNATED 4145 GROUP @4  SUBCOMPONENT  @16028
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @16030 LABEL dw_scs_skip_candlekeep_altogether DESIGNATED 4146 GROUP @4  SUBCOMPONENT  @16028
+
+
+
+//////////////////////////////////////////
+//// Extend area requiring a mage license
+//////////////////////////////////////////
+
+BEGIN @3372 LABEL dw_scs_Extend_area_requiring_mage_license DESIGNATED 4150 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+//////////////////////////////////////////
+///// Higher cost for a mage license
+//////////////////////////////////////////////
+
+BEGIN @3367  LABEL dw_scs_higher_cost_mage_license_10 DESIGNATED 4160 GROUP @4 SUBCOMPONENT @3366
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3368 LABEL dw_scs_higher_cost_mage_license_15 DESIGNATED 4161 GROUP @4 SUBCOMPONENT @3366
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3369 LABEL dw_scs_higher_cost_mage_license_20 DESIGNATED 4162 GROUP @4 SUBCOMPONENT @3366
+/// --- /// DEFAULT_CHOICE
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3370 LABEL dw_scs_higher_cost_mage_license_30 DESIGNATED 4163 GROUP @4 SUBCOMPONENT @3366
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3371 LABEL dw_scs_higher_cost_mage_license_50 DESIGNATED 4164 GROUP @4 SUBCOMPONENT @3366
+
+
+
+//////////////////////////////////////////
+///// Higher cost to get to Spellhold
+//////////////////////////////////////////////
+
+BEGIN @42 LABEL dw_scs_higher_cost_spellhold_40 DESIGNATED 4170 GROUP @4 SUBCOMPONENT @41
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @43 LABEL dw_scs_higher_cost_spellhold_60 DESIGNATED 4171 GROUP @4 SUBCOMPONENT @41
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @44 LABEL dw_scs_higher_cost_spellhold_80 DESIGNATED 4172 GROUP @4 SUBCOMPONENT @41
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @45 LABEL dw_scs_higher_cost_spellhold_100 DESIGNATED 4173 GROUP @4 SUBCOMPONENT @41
+/// --- /// DEFAULT_CHOICE
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+BEGIN @46 LABEL dw_scs_higher_cost_spellhold_120 DESIGNATED 4174 GROUP @4 SUBCOMPONENT @41
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//// Early access to Watchers' Keep
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @49 LABEL dw_scs_early_access_watchers_keep DESIGNATED 4190 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//	Randomise teleport maze
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3365 LABEL dw_scs_randomise_teleport_maze DESIGNATED 4210 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//	No-chimp
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @47 LABEL dw_scs_no_chimp DESIGNATED 4215 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+//	No-ammo
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3321 LABEL dw_scs_no_ammo_0 DESIGNATED 4216 SUBCOMPONENT @48 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+//////////////////
+
+BEGIN @3322 LABEL dw_scs_no_ammo_1 DESIGNATED 4217 SUBCOMPONENT @48 GROUP @4
+
+
+
+//////////////////
+
+BEGIN @3323 LABEL dw_scs_no_ammo_2 DESIGNATED 4218 SUBCOMPONENT @48 GROUP @4
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	Delay bonus merchants
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3373 LABEL dw_scs_delay_bonus_merchants DESIGNATED 4230 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	HLAs as innate
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3397 LABEL dw_scs_hlas_innate DESIGNATED 4240 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE !GAME_IS ~iwdee~ @50009
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+FORBID_COMPONENT "setup-spell_rev.tp2" 0 @230
+REQUIRE_PREDICATE (!MOD_IS_INSTALLED ~dw_talents/dw_talents.tp2~ 60200) @50015
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	sequencers as innate
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3400 LABEL dw_scs_sequencers_innate DESIGNATED 4250 GROUP @4 
+
+//REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+REQUIRE_PREDICATE !FILE_EXISTS_IN_GAME "qdtnb_metamagic.qd" @231
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+////	ease-of-use AI
+////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @7 LABEL dw_scs_ease_of_use_ai DESIGNATED 5000 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Make Stoneskin invisible
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @3351 LABEL dw_scs_make_stoneskin_invisible DESIGNATED 5070 GROUP @4
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+REQUIRE_PREDICATE ENGINE_IS ~tob~ @2000
+REQUIRE_PREDICATE FILE_EXISTS "bgmain.exe" @2000
+REQUIRE_PREDICATE !FILE_CONTAINS_EVALUATED (~tobex_ini/ToBExTweak.ini~ ~Disable Stoneskin Grey Colour=1~) @3391
+
+
+
+//////////////////////////////////////////////////////////////////////////
+///	Improved TotSC cutscenes
+/////////////////////////////////////////////////////////////////////////
+
+BEGIN @24125 LABEL dw_scs_totsc_textscreens DESIGNATED 5080 GROUP @4
+REQUIRE_PREDICATE GAME_IS "bgee bg2ee eet" @16002
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////
+///	AI enhancements
+/// (25 as of v32)
+/////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+//// AI setup
+//// INSIST this remains 5900
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @16024 LABEL dw_scs_initial_ai DESIGNATED 5900 GROUP @6
+
+REQUIRE_PREDICATE (GAME_IS ~tutu tutu_totsc bgee bg2ee eet iwdee~ || MOD_IS_INSTALLED ~setup-bg2fixpack.tp2~ ~0~ ) @24124
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Improved General AI
+//
+// INSIST this remains 6000
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @61 LABEL dw_scs_improved_general_ai DESIGNATED 6000 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Better Calls for Help
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @62 LABEL dw_scs_better_calls_for_help DESIGNATED 6010 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+//IWD improved AI/better calls for help
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @64 LABEL dw_scs_genai_iwd DESIGNATED 6020 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS iwdee @50008
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Smarter Mages
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @80 LABEL dw_scs_smarter_mages DESIGNATED 6030 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Smarter Priests
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @84 LABEL dw_scs_smarter_priests DESIGNATED 6040 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+//Potions for NPCs
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @159 LABEL dw_scs_potions_for_npcs DESIGNATED 6100 GROUP @6
+//REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+//REQUIRE_PREDICATE (MOD_IS_INSTALLED "setup-stratagems.tp2" 6000 || IS_AN_INT stratagems_component_6000_installed || MOD_IS_INSTALLED "setup-stratagems.tp2" 6020 || IS_AN_INT stratagems_component_6020_installed) @3350
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Spiders
+//////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @160 LABEL dw_scs_spiders DESIGNATED 6200 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// BG1-specific
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter dryads and sirines
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20028 LABEL dw_scs_smarter_dryads_and_sirines DESIGNATED 6300 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Marginally less dumb carrion crawlers
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20029 LABEL dw_scs_marginally_less_dumb_carrion_crawlers DESIGNATED 6310 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6000 || IS_AN_INT stratagems_component_6000_installed @3350
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter basilisks
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20030 LABEL dw_scs_smarter_basilisks DESIGNATED 6320 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// BG2-specific
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+///  "Smarter" Golems
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3374 LABEL dw_scs_smarter_golems DESIGNATED 6500 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !(GAME_IS ~tutu tutu_totsc bgee~) @16000
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved Fiends and Celestials
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @63 LABEL dw_scs_improved_fiends_celestials DESIGNATED 6510 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter Genies
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @69 LABEL dw_scs_smarter_genies DESIGNATED 6520 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter Dragons
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @72 LABEL dw_scs_smarter_dragons DESIGNATED 6540 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter Beholders
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @75 LABEL dw_scs_smarter_beholders DESIGNATED 6550 GROUP @6
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Smarter Illithids
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @78 LABEL dw_scs_smarter_illithids DESIGNATED 6560 GROUP @6  // inv-by-script
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///	GITHYANKI
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @151 LABEL dw_scs_smarter_githyanki DESIGNATED 6570 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6000 || IS_AN_INT stratagems_component_6000_installed @3350
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///	vampires
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @187 LABEL dw_scs_smarter_vampires DESIGNATED 6580 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///// melissan
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3209 LABEL dw_scs_smarter_melissan DESIGNATED 6590 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///	UNDEAD
+//////////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @85 LABEL dw_scs_smarter_undead DESIGNATED 6700 GROUP @6
+REQUIRE_PREDICATE GAME_IS iwdee @1099
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+//////     ASCENSION-ONLY COMPONENTS
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Smarter Illasera
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3306 LABEL dw_scs_smarter_illasera DESIGNATED 6800 GROUP @6
+
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~illas01.itm~ @3309
+
+OUTER_SPRINT component_loc ascension
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Smarter Gromnir
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3312 LABEL dw_scs_smarter_gromnir DESIGNATED 6810 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~jumjum.bcs~ || FILE_EXISTS_IN_GAME ~fingrom.cre~) @3313
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Smarter Yaga-Shura
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3307 LABEL dw_scs_smarter_yagashura DESIGNATED 6820 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~yagaft.bcs~ || FILE_EXISTS_IN_GAME finyaga.cre) @3310
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Smarter Abazigal
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3308 LABEL dw_scs_smarter_abazigal DESIGNATED 6830 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE (FILE_EXISTS_IN_GAME ~abazdg02.cre~ || FILE_EXISTS_IN_GAME ~finabaz.cre~) @3314
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Smarter Ascension Irenicus/Sendai
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3324 LABEL dw_scs_smarter_sendai_irenicus DESIGNATED 6840 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6030 || IS_AN_INT stratagems_component_6030_installed @16045
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~fingrom.cre~ @3314
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+//////     Ascension fiends get SCS scripting
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3315 LABEL dw_scs_smarter_ascension_fiends DESIGNATED 6850 GROUP @6
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @3316
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6510 || IS_AN_INT stratagems_component_6510_installed @3316
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~fingrom.cre~ @3314
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// TACTICAL CHALLENGES  - BG1
+// 20 components as of v32
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
+///  Doppelgangers
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20031 LABEL dw_scs_smarter_doppelgangers DESIGNATED 7000 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Black Talons
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20033 LABEL dw_scs_smarter_blacktalon DESIGNATED 7010 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Random assassins
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20070 LABEL dw_scs_smarter_random_assassins DESIGNATED 7020 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Kobolds
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20027 LABEL dw_scs_smarter_kobolds DESIGNATED 7030 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Ogre assassins
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20034 LABEL dw_scs_smarter_ogre_assassin DESIGNATED 7040 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Ulcaster
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20035 LABEL dw_scs_improved_ulcaster DESIGNATED 7050 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Werewolf island
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20036 LABEL dw_scs_improved_werewolf_island DESIGNATED 7060 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Durlag's Tower
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20037 LABEL dw_scs_improved_durlag_tower DESIGNATED 7070 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Demon cult
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20038 LABEL dw_scs_improved_demon_cult DESIGNATED 7080 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Druids
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20089 LABEL dw_scs_improved_druids DESIGNATED 7090 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6040 || IS_AN_INT stratagems_component_6040_installed @16047
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Bassilus
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20090 LABEL dw_scs_improved_bassilus DESIGNATED 7100 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Drasus
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20091 LABEL dw_scs_improved_drasus DESIGNATED 7110 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Red wizards
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20092 LABEL dw_scs_improved_redwizard DESIGNATED 7130 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6030 || IS_AN_INT stratagems_component_6030_installed @16046
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Iron Throne in undercity
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20093 LABEL dw_scs_improved_c7throne DESIGNATED 7140 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Carsa and Kahrk
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @24126 LABEL dw_scs_improved_carsa_kahrk DESIGNATED 7150 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved C2 end-battle
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20042 LABEL dw_scs_improved_chapter_two_end_battle DESIGNATED 7200 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved C3 end-battle
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20043 LABEL dw_scs_improved_chapter_three_end_battle DESIGNATED 7210 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved C4 end-battle
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20044 LABEL dw_scs_improved_chapter_four_end_battle DESIGNATED 7220 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved C5 end-battle
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20045 LABEL dw_scs_improved_chapter_five_end_battle DESIGNATED 7230 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  Improved C7 end-battle
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20047 LABEL dw_scs_improved_final_battle DESIGNATED 7250 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///  BG1 misc
+///////////////////////////////////////////////////////////////////////////////
+
+BEGIN @20039 LABEL dw_scs_improved_minor_encounters_bg1 DESIGNATED 7900 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE GAME_IS ~bgt tutu tutu_totsc bgee eet~ @16001
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+// TACTICAL CHALLENGES  - BG2
+// 18 components as of v32
+//////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved starting dungeon
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3334 LABEL dw_scs_improved_starting_dungeon DESIGNATED 8000 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved shade lord
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @172 LABEL dw_scs_improved_shadelord DESIGNATED 8010 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Spellcasting demiliches
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+BEGIN @192 LABEL dw_scs_improved_demilich DESIGNATED 8020 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6030 || IS_AN_INT stratagems_component_6030_installed @16046
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Increased difficulty of random spawns
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @154 LABEL dw_scs_improved_difficulty_random_spawns DESIGNATED 8040 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+///	Improved random encounters
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @191 LABEL dw_scs_improved_random_encounters DESIGNATED 8050 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved d'Arnise keep
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @158 LABEL dw_scs_improved_arnise_keep DESIGNATED 8060 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved Unseeing Eye
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3398 LABEL dw_scs_improved_unseeing_eye DESIGNATED 8070 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6550 || IS_AN_INT stratagems_component_6550_installed @3399
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6030 || IS_AN_INT stratagems_component_6030_installed @16046
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved Bodhi
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @188 LABEL dw_scs_improved_bodhi DESIGNATED 8080 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 6580 || IS_AN_INT stratagems_component_6580_installed @16049
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved Bodhi for Ascension
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @189 LABEL dw_scs_improved_bodhi_ascension DESIGNATED 8085 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 8080 || IS_AN_INT stratagems_component_6580_installed @190
+REQUIRE_PREDICATE FILE_EXISTS_IN_GAME ~fingrom.cre~ @3314
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Spellhold items are stolen
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @181 LABEL dw_scs_party_items_taken_spellhold DESIGNATED 8090 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Improved battle with Irenicus in Spellhold
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3357 LABEL dw_scs_improved_irenicus_spellhold DESIGNATED 8100 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Improved sahuagin
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @194 LABEL dw_scs_improved_sahuagin DESIGNATED 8110 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+OUTER_SPRINT component_loc tactical_bg2
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Improved beholder lair
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3317 LABEL dw_scs_improved_beholder_hive DESIGNATED 8120 GROUP @16056
+
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Rebalanced troll regeneration
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @155 LABEL dw_scs_rebalanced_troll_regeneration DESIGNATED 8130 GROUP @16056
+
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+REQUIRE_PREDICATE GAME_IS "bgee bg2ee eet" @16002
+
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+/////	Improved drow
+///////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @199 LABEL dw_scs_improved_drow DESIGNATED 8140 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Watcher's Keep
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @200 LABEL dw_scs_improved_watchers_keep DESIGNATED 8150 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Fire Giants
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @180 LABEL dw_scs_improved_firegiant DESIGNATED 8160 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////	Sendai's enclave
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @161 LABEL dw_scs_improved_sendai_enclave DESIGNATED 8170 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////   Abazigal's Lair
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @173 LABEL dw_scs_improved_abazigal_enclave DESIGNATED 8180 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////   Catch-all
+/////////////////////////////////////////////////////////////////////////////////////
+
+BEGIN @3203 LABEL dw_scs_improved_minor_encounters_bg2 DESIGNATED 8190 GROUP @16056
+REQUIRE_PREDICATE !GAME_IS iwdee @50009
+REQUIRE_PREDICATE MOD_IS_INSTALLED "setup-stratagems.tp2" 5900 || IS_AN_INT stratagems_component_5900_installed @16025
+REQUIRE_PREDICATE !GAME_IS ~tutu tutu_totsc bgee~ @16000
+
+
+
+
+
+/*
+//////////////////////////////////////////////////////////////////////////
+//   BG2 resource collector
+//////////////////////////////////////////////////////////////////////////
+
+BEGIN "collect BG2 resources" LABEL dw_scs DESIGNATED 100000
+REQUIRE_PREDICATE FILE_EXISTS "dw#test_component_active.mrk" "For internal use only"
+REQUIRE_PREDICATE GAME_IS bg2ee "Run on BG2EE"
+
+
+//////////////////////////////////////////////////////////////////////////
+//   IWD resource collector
+//////////////////////////////////////////////////////////////////////////
+
+BEGIN "collect IWD resources" LABEL dw_scs DESIGNATED 200000
+REQUIRE_PREDICATE FILE_EXISTS "dw#test_component_active.mrk" "For internal use only"
+REQUIRE_PREDICATE GAME_IS iwdee "Run on IWDEE"
+
+
+*/
